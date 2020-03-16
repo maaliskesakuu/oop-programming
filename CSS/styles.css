@@ -1,0 +1,28 @@
+body {
+    height: 50000px;
+}
+
+img, #background {
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+#bird {
+    width: 120px;
+    top: 20%;
+}
+
+#pipe {
+    width: 120px;
+    top: 45%;
+}
+
+#background {
+    height: 100%;
+    width: 100%;
+    background-image: url("/assets  /bg-min.png");
+    background-repeat: repeat-x;
+    background-position: 0 0;
+    background-size: auto 100%;
+}
