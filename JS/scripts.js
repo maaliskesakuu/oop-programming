@@ -1,14 +1,14 @@
 $(document).ready(function () {
 
+	var windowHeight = $(window).height();
+
     function getRandomNumber(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    var windowHeight = $(window.height);
-
-    function makeBird() {
+	function makeBird() {
         return {
             birdId: null,
             birdSize: null,
@@ -40,7 +40,7 @@ $(document).ready(function () {
                 this.topOffset = getRandomNumber(10, 50);
                 this.movementRatio = getRandomNumber(10, 50);
                 this.birdId = 'bird_' + getRandomNumber(100, 999);
-                this.birdSize = getRandomNumber(10, 275);
+                this.birdSize = getRandomNumber(10, 250);
                 this.bounceRate = getRandomNumber(100, 300);
                 this.addBird();
             }
@@ -51,7 +51,7 @@ $(document).ready(function () {
         return {
             pipeId: null,
             pipeSize: null,
-            pipeLeft: null,
+            leftOffset: null,
             movementRatio: null,
             flip: false,
             addPipe: function() {
@@ -59,25 +59,25 @@ $(document).ready(function () {
                 _newPipe.src = 'assets  /flappy-bird-pipe-png-2-transparent-min.png';
                 _newPipe.id = this.pipeId;
                 _newPipe.style.height = this.pipeSize + 'px';
-                _newPipe.style.left = this.pipeLeft + 'px';
+                _newPipe.style.left = this.leftOffset + 'px';
 
                 if (this.flip) {
                     _newPipe.style.top = 0;
                     _newPipe.style.transform = 'rotate(180deg)';
                 } else {
-                    _newPipe.style.top = '801.11' - this.pipeSize + 'px';
+                    _newPipe.style.top = windowHeight - this.pipeSize + 'px';
                 }
 
                 document.body.appendChild(_newPipe);
             },
-            moveRight: function(scrollDistance) {
-                document.getElementById(this.pipeId).style.left = this.pipeLeft + scrollDistance / this.movementRatio + 'px';
+            moveLeft: function(scrollDistance) {
+                document.getElementById(this.pipeId).style.left = this.leftOffset - scrollDistance / this.movementRatio + 'px';
             },
             init: function(flip) {
                 this.pipeId = 'pipe_' + getRandomNumber(1, 999);
-                this.pipeSize = getRandomNumber(150, 375);
-                this.movementRatio = this.pipeSize / 10;
-                this.pipeLeft = getRandomNumber(50, 2000);
+                this.pipeSize = getRandomNumber(150, 325);
+                this.movementRatio = this.pipeSize / 5;
+                this.leftOffset = getRandomNumber(50, 3000);
                 this.flip = (flip === true);
                 this.addPipe();
             }
@@ -110,7 +110,7 @@ $(document).ready(function () {
     pipe3.init(true);
     pipe4.init(true);
     pipe5.init();
-    pipe6.init(true);
+    pipe6.init();
     pipe7.init(true);
     pipe8.init();
     pipe9.init(true);
@@ -128,16 +128,16 @@ $(document).ready(function () {
         bird2.fly(offset);
         bird3.fly(offset);
         bird4.fly(offset);
-        pipe1.moveRight(offset);
-        pipe2.moveRight(offset);
-        pipe3.moveRight(offset);
-        pipe4.moveRight(offset);
-        pipe5.moveRight(offset);
-        pipe6.moveRight(offset);
-        pipe7.moveRight(offset);
-        pipe8.moveRight(offset);
-        pipe9.moveRight(offset);
-        pipe10.moveRight(offset);
+        pipe1.moveLeft(offset);
+        pipe2.moveLeft(offset);
+        pipe3.moveLeft(offset);
+        pipe4.moveLeft(offset);
+        pipe5.moveLeft(offset);
+        pipe6.moveLeft(offset);
+        pipe7.moveLeft(offset);
+        pipe8.moveLeft(offset);
+        pipe9.moveLeft(offset);
+        pipe10.moveLeft(offset);
         
         $(document).on('click', flyUp);
 
